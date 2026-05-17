@@ -588,30 +588,69 @@ document.querySelectorAll('.btn-solid,.btn-frame,.btn-solid-gold,.btn-frame-gold
   btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
 });
 
-/* MUSIC */
+/* ── MUSIC ───────────────────────────────────── */
 (function(){
-  const tracks=[{name:'Draped Elegance',src:'./Draped_Elegance.mp3'}];
+  const tracks=[
+    {name:'Draped Elegance',src:'./Draped_Elegance.mp3'},
+  ];
   let ci=0,playing=false;
   const audio=new Audio();
   audio.volume=0.7;
   const btn=document.getElementById('music-btn');
-  if(!btn)return;
-  function loadTrack(){audio.src=tracks[ci].src;audio.loop=tracks.length===1}
-  function play(){audio.play().then(()=>{playing=true;btn.classList.add('playing')}).catch(()=>{});}
-  function pause(){audio.pause();playing=false;btn.classList.remove('playing')}
+
+  function loadTrack(){audio.src=tracks[ci].src;audio.loop=tracks.length===1;}
+  function play(){
+    audio.play().then(()=>{
+      playing=true;
+      btn.classList.add('playing');
+      sessionStorage.setItem('musicPlaying','true');
+      sessionStorage.setItem('musicTime', audio.currentTime);
+    }).catch(()=>{});
+  }
+  function pause(){
+    audio.pause();
+    playing=false;
+    btn.classList.remove('playing');
+    sessionStorage.setItem('musicPlaying','false');
+  }
+
+  // Save current time continuously
+  audio.addEventListener('timeupdate',()=>{
+    if(playing) sessionStorage.setItem('musicTime', audio.currentTime);
+  });
+
   btn.addEventListener('click',e=>{e.stopPropagation();playing?pause():play();});
   audio.addEventListener('ended',()=>{ci=(ci+1)%tracks.length;loadTrack();play();});
+  audio.addEventListener('error',()=>{setTimeout(()=>{ci=(ci+1)%tracks.length;loadTrack();if(playing)play();},500);});
+
   loadTrack();
+
+  // Restore state from previous page
+  const wasPlaying = sessionStorage.getItem('musicPlaying')==='true';
+  const savedTime = parseFloat(sessionStorage.getItem('musicTime')||'0');
+
+  if(wasPlaying){
+    audio.addEventListener('canplay',()=>{
+      audio.currentTime = savedTime||0;
+      play();
+    },{once:true});
+  }
+
+  // First interaction fallback for browsers that block autoplay
   let started=false;
   function kick(){
-    if(started)return;started=true;play();
+    if(started)return;
+    started=true;
+    if(!wasPlaying) play();
     document.removeEventListener('click',kick);
     document.removeEventListener('touchstart',kick);
     document.removeEventListener('keydown',kick);
   }
-  document.addEventListener('click',kick,{passive:true});
-  document.addEventListener('touchstart',kick,{passive:true});
-  document.addEventListener('keydown',kick,{passive:true});
+  if(!wasPlaying){
+    document.addEventListener('click',kick,{passive:true});
+    document.addEventListener('touchstart',kick,{passive:true});
+    document.addEventListener('keydown',kick,{passive:true});
+  }
 })();
 
 })();
