@@ -1,1 +1,535 @@
-PLACEHOLDER_SERVICES
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Just By Designs - Luxury Event Draping South Florida</title>
+<meta name="description" content="Explore Just By Designs' full suite of luxury event services: wedding transformations, ceiling drapery, backdrops, stage design, lighting integration, and custom event design across South Florida.">
+<meta name="keywords" content="event draping services South Florida, wedding drapery Broward, ceiling drapery Fort Lauderdale, custom backdrops Miami, stage design Palm Beach, luxury event design Florida">
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="US-FL">
+<link rel="canonical" href="https://www.justbydesigns.com/services.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Services | Just By Designs - Luxury Event Draping South Florida">
+<meta property="og:description" content="Explore Just By Designs' full suite of luxury event services: wedding transformations, ceiling drapery, backdrops, stage design, lighting integration, and custom event design across South Florida.">
+<meta property="og:url" content="https://www.justbydesigns.com/services.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Just By Design LLC","telephone":"(954) 839-7173","url":"https://www.justbydesigns.com","openingHours":"Mo-Su 00:00-24:00","areaServed":[{"@type":"County","name":"Broward County","addressRegion":"FL"},{"@type":"County","name":"Miami-Dade County","addressRegion":"FL"},{"@type":"County","name":"Palm Beach County","addressRegion":"FL"}],"sameAs":["https://www.facebook.com/Justbydesignllc/","https://www.instagram.com/justbydesigns/"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"34"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & VARS ─────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:auto}
+:root{
+  --cream:#F5F0E8; --cream2:#EDE8DE; --cream3:#FAF8F4;
+  --gold:#8B6F3E; --gold-lt:#A8895A; --gold-pale:#E8DCC8;
+  --dark:#1A1208; --dark2:#231A0D;
+  --body:#3D3328; --muted:#7A6F62; --border:#DDD5C5;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,sans-serif;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --ease-in-out:cubic-bezier(0.76,0,0.24,1);
+}
+body{
+  background:var(--cream3); color:var(--body);
+  font-family:var(--sans); font-weight:300;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  cursor:none;
+}
+#cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s var(--ease-out),height .3s var(--ease-out),background .3s;will-change:transform;}
+#cursor-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(139,111,62,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .4s var(--ease-out),height .4s var(--ease-out),border-color .3s;will-change:transform;}
+body.cursor-hover #cursor{width:14px;height:14px;background:var(--gold-lt)}
+body.cursor-hover #cursor-ring{width:56px;height:56px;border-color:rgba(139,111,62,.7)}
+body.cursor-click #cursor{width:6px;height:6px}
+@media(hover:none){#cursor,#cursor-ring{display:none}body{cursor:auto}}
+#loader{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.loader-panel{position:absolute;inset:0;background:var(--dark);transform-origin:top;transition:transform 1s var(--ease-in-out);}
+.loader-panel.left{transform-origin:left}
+.loader-panel.right{transform-origin:right;transition-delay:.1s}
+#loader.out .loader-panel.left{transform:scaleX(0)}
+#loader.out .loader-panel.right{transform:scaleX(0)}
+.loader-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:1.5rem;opacity:1;transition:opacity .4s;}
+#loader.out .loader-content{opacity:0}
+.loader-logo{font-family:var(--serif);font-size:2rem;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-pale);opacity:0;animation:lUp .8s var(--ease-out) forwards .2s;}
+.loader-logo span{font-style:italic}
+.loader-line{width:0;height:1px;background:var(--gold);animation:lLine 1.2s var(--ease-out) forwards .5s;}
+.loader-pct{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(232,220,200,.4);opacity:0;animation:lUp .6s ease forwards .4s;}
+@keyframes lUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes lLine{to{width:100px}}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3rem;gap:1rem;background:rgba(245,240,232,0);backdrop-filter:blur(0px);border-bottom:1px solid transparent;transition:all .5s var(--ease-out);}
+nav.scrolled{padding:1rem 3rem;background:rgba(245,240,232,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:var(--border);}
+.nav-logo{font-family:var(--serif);font-size:1.45rem;font-weight:400;color:#fff;text-decoration:none;letter-spacing:.01em;transition:color .4s;flex-shrink:0;}
+nav.scrolled .nav-logo{color:var(--dark)}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none;flex:1;justify-content:center;}
+.nav-links a{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8);text-decoration:none;padding:.3rem .9rem;white-space:nowrap;transition:color .25s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:.9rem;right:.9rem;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease-out);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+nav.scrolled .nav-links a{color:var(--body)}
+nav.scrolled .nav-links a:hover,nav.scrolled .nav-links a.active{color:var(--gold)}
+.nav-right{flex-shrink:0}
+.nav-quote{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:#fff;padding:.75rem 1.5rem;text-decoration:none;border:2px solid var(--gold);display:inline-block;transition:background .3s,color .3s,transform .2s;}
+.nav-quote:hover{background:transparent;color:var(--gold);transform:translateY(-2px)}
+nav.scrolled .nav-quote{color:#fff}
+nav.scrolled .nav-quote:hover{color:var(--gold)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:4px;}
+.nav-hamburger span{display:block;width:24px;height:1.5px;background:#fff;transition:transform .3s,opacity .3s,background .4s;}
+nav.scrolled .nav-hamburger span{background:var(--dark)}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;inset:0;z-index:400;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;}
+.nav-drawer.open{opacity:1;visibility:visible}
+.nav-drawer a{font-family:var(--serif);font-size:2.5rem;font-weight:300;color:var(--gold-pale);text-decoration:none;letter-spacing:.05em;transition:color .25s;}
+.nav-drawer a:hover{color:var(--gold)}
+.nav-drawer .drawer-cta{font-family:var(--sans);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;background:var(--gold);color:#fff;padding:1rem 2.5rem;margin-top:1rem;}
+.btn-solid,.btn-frame,.btn-solid-gold,.btn-frame-gold,.btn-frame-dark{display:inline-block;position:relative;overflow:hidden;font-family:var(--sans);font-size:.62rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:none;transition:transform .3s var(--ease-out),box-shadow .3s;}
+.btn-solid{background:var(--gold);color:#fff;padding:1.1rem 2.4rem;border:2px solid var(--gold)}
+.btn-frame{background:transparent;color:#fff;padding:1.1rem 2.4rem;border:1px solid rgba(255,255,255,.5)}
+.btn-solid-gold{background:var(--gold);color:#fff;padding:1.1rem 2.4rem;border:2px solid var(--gold)}
+.btn-frame-gold{background:transparent;color:var(--gold);padding:1.1rem 2.4rem;border:1px solid var(--gold)}
+.btn-frame-dark{background:transparent;color:var(--body);padding:1.1rem 2.4rem;border:1px solid var(--border)}
+.btn-solid::before,.btn-solid-gold::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.15) 50%,transparent 100%);transform:translateX(-100%);transition:transform .5s ease;}
+.btn-solid:hover::before,.btn-solid-gold:hover::before{transform:translateX(100%)}
+.btn-solid:hover,.btn-solid-gold:hover{box-shadow:0 8px 32px rgba(139,111,62,.35);transform:translateY(-3px)}
+.btn-frame:hover{border-color:rgba(255,255,255,.9);transform:translateY(-2px)}
+.btn-frame-gold:hover{background:var(--gold);color:#fff;transform:translateY(-2px)}
+.btn-frame-dark:hover{border-color:var(--muted);transform:translateY(-2px)}
+.marquee-strip{background:var(--gold);overflow:hidden;white-space:nowrap;padding:.8rem 0;border-top:1px solid var(--gold-lt);}
+.marquee-track{display:inline-flex;animation:marquee 28s linear infinite}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.marquee-item{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85);padding:0 2.5rem;}
+.marquee-dot{color:rgba(255,255,255,.4);margin-right:2.5rem}
+.section{padding:9rem 3rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.eyebrow{font-size:.57rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;}
+.eyebrow::after{content:'';flex:0 0 24px;height:1px;background:var(--gold-pale)}
+.section-title{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.8rem);font-weight:400;line-height:1.1;}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-sub{font-size:.9rem;line-height:1.9;color:var(--muted);max-width:560px}
+.reveal-text{overflow:hidden}
+.reveal-text .line{display:block;overflow:hidden}
+.reveal-text .line-inner{display:block;transform:translateY(100%);transition:transform .9s var(--ease-out);}
+.reveal-text.in .line-inner{transform:none}
+.reveal-text.in .line:nth-child(2) .line-inner{transition-delay:.1s}
+.reveal-text.in .line:nth-child(3) .line-inner{transition-delay:.2s}
+.img-reveal{position:relative;overflow:hidden}
+.img-reveal::after{content:'';position:absolute;inset:0;background:var(--gold-pale);transform:scaleX(1);transform-origin:left;transition:transform .9s var(--ease-out);}
+.img-reveal.in::after{transform:scaleX(0);transform-origin:right}
+.img-reveal img{transform:scale(1.08);transition:transform 1.2s var(--ease-out) .2s;display:block;width:100%;height:100%;object-fit:cover;}
+.img-reveal.in img{transform:scale(1)}
+#stats{background:var(--dark);padding:8rem 3rem;position:relative;overflow:hidden;}
+#stats::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(139,111,62,.12) 0%,transparent 65%);pointer-events:none;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;max-width:720px;margin:0 auto;gap:5rem 3rem;text-align:center;}
+.stat-item{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.stat-item.in{opacity:1;transform:none}
+.stat-item:nth-child(2){transition-delay:.1s}
+.stat-item:nth-child(3){transition-delay:.2s}
+.stat-item:nth-child(4){transition-delay:.3s}
+.stat-num{font-family:var(--serif);font-size:clamp(3rem,7vw,5rem);font-weight:300;color:var(--gold);line-height:1;margin-bottom:.6rem;}
+.stat-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+#cta{background:var(--dark);padding:10rem 3rem;text-align:center;position:relative;overflow:hidden;}
+#cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(139,111,62,.1) 0%,transparent 65%);pointer-events:none;}
+#cta .section-title{color:#fff;margin-bottom:1rem}
+#cta .section-title em{color:var(--gold-pale)}
+#cta .eyebrow{justify-content:center;color:var(--gold-pale)}
+#cta .eyebrow::after{background:rgba(232,220,200,.3)}
+#cta .section-sub{color:rgba(255,255,255,.5);margin:1rem auto 3rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+footer{background:var(--dark);padding:5.5rem 3rem 3rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
+.f-logo{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--gold-pale);text-decoration:none;display:block;margin-bottom:1rem;}
+.f-tagline{font-size:.78rem;line-height:1.9;color:rgba(255,255,255,.3);max-width:240px}
+.f-social{display:flex;gap:.7rem;margin-top:1.8rem}
+.fsoc{width:34px;height:34px;border:1px solid rgba(139,111,62,.25);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.35);text-decoration:none;font-size:.62rem;transition:border-color .3s,color .3s;}
+.fsoc:hover{border-color:var(--gold);color:var(--gold)}
+.f-col-t{font-size:.54rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.3rem}
+.f-links{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.f-links a{font-size:.77rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .3s}
+.f-links a:hover{color:rgba(255,255,255,.9)}
+.footer-bot{padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.f-copy{font-size:.62rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
+.f-motto{font-family:var(--serif);font-style:italic;font-size:.95rem;color:rgba(139,111,62,.4)}
+#music-btn{position:fixed;bottom:2rem;right:2rem;z-index:9000;width:52px;height:52px;border-radius:50%;background:#fff;border:none;cursor:none;box-shadow:0 4px 24px rgba(0,0,0,.13);display:flex;align-items:center;justify-content:center;transition:box-shadow .3s,transform .3s;}
+#music-btn:hover{box-shadow:0 8px 32px rgba(0,0,0,.2);transform:scale(1.08)}
+#music-btn svg{width:20px;height:20px;fill:none;stroke:var(--body);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#music-btn.playing svg{stroke:var(--gold)}
+#music-btn.playing{box-shadow:0 0 0 3px rgba(139,111,62,.2)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+.page-hero{position:relative;height:60vh;min-height:480px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.page-hero-img{position:absolute;inset:0}
+.page-hero-img img{width:100%;height:110%;object-fit:cover;filter:brightness(.4) saturate(.7);}
+.page-hero-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,18,8,.9) 0%,rgba(26,18,8,.2) 60%);}
+.page-hero-body{position:relative;z-index:3;text-align:center;padding:0 2rem;max-width:800px;}
+.page-hero h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,5.5rem);font-weight:400;color:#fff;line-height:1.05;margin-bottom:1rem;}
+.page-hero h1 em{font-style:italic;color:var(--gold-pale)}
+.page-hero .hero-eyebrow{font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:1.6rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.page-hero .hero-eyebrow-line{flex:0 0 32px;height:1px;background:rgba(255,255,255,.3)}
+.page-hero p{font-size:.95rem;line-height:1.9;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto;}
+@media(max-width:900px){nav{padding:1.1rem 1.5rem}nav.scrolled{padding:.85rem 1.5rem}.nav-logo{font-size:1.2rem}.nav-links a{padding:.3rem .6rem;font-size:.54rem;letter-spacing:.14em}.nav-quote{padding:.65rem 1rem;font-size:.54rem}.section{padding:6rem 1.5rem}.footer-top{grid-template-columns:1fr 1fr;gap:2.5rem}footer{padding:4rem 1.5rem 2.5rem}}
+@media(max-width:560px){.nav-links,.nav-right{display:none}.nav-hamburger{display:flex}nav{background:rgba(245,240,232,.97) !important;backdrop-filter:blur(20px)}.nav-logo{color:var(--dark) !important}}
+
+
+.service-section{padding:8rem 3rem;border-bottom:1px solid var(--border);}
+.service-section:nth-child(even){background:var(--cream2)}
+.service-section:nth-child(odd){background:var(--cream3)}
+.service-section-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center;}
+.service-section:nth-child(even) .service-section-inner{direction:rtl}
+.service-section:nth-child(even) .service-section-inner > *{direction:ltr}
+.service-img-block{aspect-ratio:4/5;overflow:hidden;position:relative;}
+.service-img-block img{width:100%;height:100%;object-fit:cover;filter:saturate(.8);display:block;transition:transform 8s ease;}
+.service-img-block:hover img{transform:scale(1.04)}
+.service-content h2{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.1;margin-bottom:1.2rem;}
+.service-content h2 em{font-style:italic;color:var(--gold)}
+.service-content p{font-size:.9rem;line-height:1.9;color:var(--muted);margin-bottom:1rem;}
+.service-features{list-style:none;margin:1.5rem 0;display:flex;flex-direction:column;gap:.6rem;}
+.service-features li{font-size:.83rem;color:var(--body);padding-left:1.2rem;position:relative;}
+.service-features li::before{content:'';position:absolute;left:0;top:.55em;width:6px;height:1px;background:var(--gold);}
+@media(max-width:900px){.service-section-inner{grid-template-columns:1fr;gap:3rem;direction:ltr!important}.service-section{padding:5rem 1.5rem}}
+
+</style>
+</head>
+<body data-page="services">
+<div id="cursor"></div>
+<div id="cursor-ring"></div><div id="loader">
+  <div class="loader-panel left"></div>
+  <div class="loader-panel right"></div>
+  <div class="loader-content">
+    <div class="loader-logo">Just <span>By Design</span></div>
+    <div class="loader-line"></div>
+    <div class="loader-pct">South Florida's Premier Event Studio</div>
+  </div>
+</div><nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo">Just By Designs</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="weddings.html">Weddings</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="areas.html">Areas</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-right"><a href="contact.html" class="nav-quote">Book a Consultation</a></div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="index.html">Home</a><a href="services.html">Services</a><a href="weddings.html">Weddings</a>
+  <a href="gallery.html">Gallery</a><a href="areas.html">Areas</a><a href="about.html">About</a>
+  <a href="faq.html">FAQ</a><a href="contact.html" class="drawer-cta">Book a Consultation</a>
+</div>
+<header class="page-hero">
+  <div class="page-hero-img"><img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238842190-794RUVQ3JIEM128O5CW7/Just_by_design-14.JPG" alt="Luxury event draping services by Just By Designs"></div>
+  <div class="page-hero-scrim"></div>
+  <div class="page-hero-body">
+    <p class="hero-eyebrow"><span class="hero-eyebrow-line"></span>Just By Designs<span class="hero-eyebrow-line"></span></p>
+    <h1>Our <em>Services</em></h1>
+    <p>From intimate ceremonies to grand galas, we offer a complete suite of luxury event design services throughout South Florida.</p>
+  </div>
+</header>
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Wedding Drapery</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Ceiling Treatments</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Custom Backdrops</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Stage Design</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Lighting Integration</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Custom Event Design</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Wedding Drapery</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Ceiling Treatments</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Custom Backdrops</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Stage Design</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Lighting Integration</span><span class="marquee-dot">&#10022;</span>
+    <span class="marquee-item">Custom Event Design</span><span class="marquee-dot">&#10022;</span>
+  </div>
+</div>
+<section class="service-section">
+  <div class="service-section-inner">
+    <div class="service-img-block img-reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238842190-794RUVQ3JIEM128O5CW7/Just_by_design-14.JPG" alt="Wedding transformation drapery South Florida">
+    </div>
+    <div class="service-content">
+      <p class="eyebrow">Service 01</p>
+      <h2 class="reveal-text"><span class="line"><span class="line-inner">Wedding</span></span><span class="line"><span class="line-inner"><em>Transformations</em></span></span></h2>
+      <p class="reveal">Your wedding day deserves an environment as extraordinary as your love story. Just By Designs creates complete wedding transformations that turn any venue across South Florida into an ethereal dreamscape.</p>
+      <p class="reveal d1">We work closely with couples throughout Broward, Miami-Dade, and Palm Beach County to understand their unique vision, then bring it to life with master-crafted fabric installations and precision installation.</p>
+      <ul class="service-features reveal d2">
+        <li>Full ceremony and reception drapery</li><li>Bridal entrance backdrops</li>
+        <li>Sweetheart table treatments</li><li>Aisle and altar framing</li>
+        <li>Tent and ballroom transformations</li><li>Complete venue assessment and planning</li>
+      </ul>
+      <div class="reveal d3" style="margin-top:2rem"><a href="weddings.html" class="btn-solid-gold">Wedding Services</a></div>
+    </div>
+  </div>
+</section>
+<section class="service-section">
+  <div class="service-section-inner">
+    <div class="service-img-block img-reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238808458-0TBWBV3J9YK33WJWUFQ2/ArabianNights_0088.jpg" alt="Ceiling drapery installation Fort Lauderdale">
+    </div>
+    <div class="service-content">
+      <p class="eyebrow">Service 02</p>
+      <h2 class="reveal-text"><span class="line"><span class="line-inner">Ceiling</span></span><span class="line"><span class="line-inner"><em>Drapery</em></span></span></h2>
+      <p class="reveal">The ceiling is often the most overlooked canvas in event design. Our ceiling drapery installations create dramatic overhead environments that change the entire feeling of a space.</p>
+      <p class="reveal d1">Whether you envision a starlit canopy for a romantic wedding in Fort Lauderdale or a billowing cloud installation for a corporate event in Coral Gables, our team executes flawlessly.</p>
+      <ul class="service-features reveal d2">
+        <li>Full room ceiling canopies</li><li>Swag and ruching techniques</li>
+        <li>Starlight fabric installations</li><li>Tent liner treatments</li>
+        <li>Low and high ceiling solutions</li><li>Structural rigging and hardware</li>
+      </ul>
+      <div class="reveal d3" style="margin-top:2rem"><a href="contact.html" class="btn-solid-gold">Request a Quote</a></div>
+    </div>
+  </div>
+</section>
+<section class="service-section">
+  <div class="service-section-inner">
+    <div class="service-img-block img-reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238804144-2307M8ZZHGDVO03SNIFG/40+For+the+Culture-100.jpg" alt="Luxury event drapery Broward County">
+    </div>
+    <div class="service-content">
+      <p class="eyebrow">Service 03</p>
+      <h2 class="reveal-text"><span class="line"><span class="line-inner">Luxury Event</span></span><span class="line"><span class="line-inner"><em>Drapery</em></span></span></h2>
+      <p class="reveal">Beyond weddings, we bring the same level of artistry and luxury to every type of event. Corporate galas, quinceañeras, anniversaries, charity fundraisers -- every celebration deserves an exceptional environment.</p>
+      <p class="reveal d1">Our luxury event drapery service covers every aspect of fabric design for your event space. We source premium materials and use expert techniques to create environments that reflect the prestige of your occasion.</p>
+      <ul class="service-features reveal d2">
+        <li>Premium fabric selection and sourcing</li><li>Wall and pillar treatments</li>
+        <li>Entrance and foyer transformations</li><li>Lounge area drapery</li>
+        <li>Table and floor-length draping</li><li>Color-coordinated design planning</li>
+      </ul>
+      <div class="reveal d3" style="margin-top:2rem"><a href="contact.html" class="btn-solid-gold">Book a Consultation</a></div>
+    </div>
+  </div>
+</section>
+<section class="service-section">
+  <div class="service-section-inner">
+    <div class="service-img-block img-reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238805095-JIZH4C5KTLURHULBG8SX/ArabianNights_0046.jpg" alt="Custom backdrop and stage design Miami">
+    </div>
+    <div class="service-content">
+      <p class="eyebrow">Service 04</p>
+      <h2 class="reveal-text"><span class="line"><span class="line-inner">Backdrops</span></span><span class="line"><span class="line-inner">&amp; <em>Stage Design</em></span></span></h2>
+      <p class="reveal">Every great event needs a focal point -- a stunning visual anchor that draws the eye and sets the tone. Our custom backdrop and stage design service creates those unforgettable centerpieces.</p>
+      <p class="reveal d1">From fabric ceremony arches and photobooth backdrops to full stage transformations for corporate presentations in Boca Raton or Miami, we design and install backdrops that make every moment more memorable.</p>
+      <ul class="service-features reveal d2">
+        <li>Ceremony arch and altar backdrops</li><li>Photo opportunity backdrops</li>
+        <li>Stage and presentation backdrops</li><li>Balloon and floral integration</li>
+        <li>Custom shaped and sized installations</li><li>Brand-forward corporate backdrops</li>
+      </ul>
+      <div class="reveal d3" style="margin-top:2rem"><a href="contact.html" class="btn-solid-gold">Design Your Backdrop</a></div>
+    </div>
+  </div>
+</section>
+<section class="service-section">
+  <div class="service-section-inner">
+    <div class="service-img-block img-reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592610676545-UQMH797RK3WNN58TZ6YK/SampleImage0006.jpg" alt="Event lighting integration South Florida">
+    </div>
+    <div class="service-content">
+      <p class="eyebrow">Service 05</p>
+      <h2 class="reveal-text"><span class="line"><span class="line-inner">Lighting</span></span><span class="line"><span class="line-inner"><em>Integration</em></span></span></h2>
+      <p class="reveal">Fabric and light are natural partners. When combined expertly, they create an atmosphere that simply cannot be achieved with either element alone. Our lighting integration service elevates every drapery installation.</p>
+      <p class="reveal d1">We work with pin spotting, uplighting, fairy lights, and LED systems to illuminate our fabric installations in ways that transform the mood throughout the event.</p>
+      <ul class="service-features reveal d2">
+        <li>Fairy light and string light integration</li><li>LED uplighting coordination</li>
+        <li>Gobo and pin spot placement</li><li>Programmable color-changing effects</li>
+        <li>Ambient and accent lighting design</li><li>Day-to-evening transition planning</li>
+      </ul>
+      <div class="reveal d3" style="margin-top:2rem"><a href="contact.html" class="btn-solid-gold">Add Lighting</a></div>
+    </div>
+  </div>
+</section>
+<section class="service-section">
+  <div class="service-section-inner">
+    <div class="service-img-block img-reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592610695742-P18GSUDYP8XNHF3ETLR4/SampleImage0010.jpg" alt="Custom event design Palm Beach County">
+    </div>
+    <div class="service-content">
+      <p class="eyebrow">Service 06</p>
+      <h2 class="reveal-text"><span class="line"><span class="line-inner">Custom Event</span></span><span class="line"><span class="line-inner"><em>Design</em></span></span></h2>
+      <p class="reveal">Some events require something completely unique. Our custom event design service is for those clients who dream without limits and expect their environment to match.</p>
+      <p class="reveal d1">Working across all three South Florida counties, our design team collaborates deeply with you to conceptualize, plan, and execute a one-of-a-kind event environment from scratch.</p>
+      <ul class="service-features reveal d2">
+        <li>Full creative consultation and mood boarding</li><li>Concept development and visualization</li>
+        <li>Theme development and execution</li><li>Complete installation and breakdown</li>
+        <li>Day-of coordination and supervision</li><li>Multi-vendor coordination support</li>
+      </ul>
+      <div class="reveal d3" style="margin-top:2rem"><a href="contact.html" class="btn-solid-gold">Start Your Vision</a></div>
+    </div>
+  </div>
+</section>
+<section id="stats">
+  <div class="section-inner">
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Events Transformed</div></div>
+      <div class="stat-item"><div class="stat-num">15+</div><div class="stat-label">Years of Excellence</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Client Satisfaction</div></div>
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Counties Served</div></div>
+    </div>
+  </div>
+</section><section id="cta">
+  <div class="section-inner">
+    <p class="eyebrow">Begin Your Journey</p>
+    <h2 class="section-title reveal">Let&#39;s Create Something <em>Unforgettable</em></h2>
+    <p class="section-sub reveal d1">Every event deserves a transformation. Contact Just By Designs for a custom quote for your South Florida event.</p>
+    <div class="cta-btns reveal d2">
+      <a href="contact.html" class="btn-solid">Book a Consultation</a>
+      <a href="gallery.html" class="btn-frame">View Our Work</a>
+    </div>
+  </div>
+</section><footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="index.html" class="f-logo">Just By Designs</a>
+        <p class="f-tagline">Transforming Spaces Into Memories. South Florida's premier luxury event draping company.</p>
+        <div class="f-social">
+          <a href="https://www.facebook.com/Justbydesignllc/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="Facebook">f</a>
+          <a href="https://www.instagram.com/justbydesigns/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="Instagram">ig</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-col-t">Navigation</div>
+        <ul class="f-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="weddings.html">Weddings</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="areas.html">Areas</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-t">Services</div>
+        <ul class="f-links">
+          <li><a href="services.html">Wedding Transformations</a></li>
+          <li><a href="services.html">Ceiling Drapery</a></li>
+          <li><a href="services.html">Luxury Event Drapery</a></li>
+          <li><a href="services.html">Backdrops &amp; Stage</a></li>
+          <li><a href="services.html">Lighting Integration</a></li>
+          <li><a href="services.html">Custom Event Design</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-t">Contact</div>
+        <ul class="f-links">
+          <li><a href="tel:+19548397173">(954) 839-7173</a></li>
+          <li><a href="contact.html">Book a Consultation</a></li>
+          <li><a href="https://www.facebook.com/Justbydesignllc/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          <li><a href="https://www.instagram.com/justbydesigns/" target="_blank" rel="noopener noreferrer">@justbydesigns</a></li>
+          <li><a href="https://www.justbydesigns.com" target="_blank" rel="noopener noreferrer">justbydesigns.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <p class="f-copy">© 2026 Just By Designs. All Rights Reserved. Serving Broward, Miami-Dade &amp; Palm Beach County, Florida.</p>
+      <p class="f-motto">Transforming Spaces Into Memories.</p>
+    </div>
+  </div>
+</footer><button id="music-btn" aria-label="Toggle music">
+  <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+</button>
+<script>
+
+(function(){
+'use strict';
+const cur=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));});
+document.addEventListener('mousedown',()=>document.body.classList.add('cursor-click'));
+document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-click'));
+
+/* LOADER */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const loader=document.getElementById('loader');
+    if(loader){loader.classList.add('out');setTimeout(()=>{loader.style.display='none';},1100);}
+  },900);
+});
+
+/* NAV SCROLL */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>60)nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+},{passive:true});
+// Force scrolled on interior pages since no hero
+if(document.body.dataset.page && document.body.dataset.page !== 'home'){
+  nav.classList.add('scrolled');
+}
+
+/* HAMBURGER */
+const ham=document.getElementById('hamburger');
+const drawer=document.getElementById('navDrawer');
+if(ham&&drawer){
+  ham.addEventListener('click',()=>{
+    const open=drawer.classList.toggle('open');
+    ham.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',open);
+    drawer.setAttribute('aria-hidden',!open);
+  });
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    drawer.classList.remove('open');ham.classList.remove('open');
+    ham.setAttribute('aria-expanded',false);drawer.setAttribute('aria-hidden',true);
+  }));
+}
+
+/* SCROLL REVEAL */
+const revealEls=document.querySelectorAll('.reveal,.reveal-text,.img-reveal,.stat-item,.service-block,.rcard,.area-card');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>obs.observe(el));
+
+/* MAGNETIC BUTTONS */
+document.querySelectorAll('.btn-solid,.btn-frame,.btn-solid-gold,.btn-frame-gold,.nav-quote').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.2;
+    const y=(e.clientY-r.top-r.height/2)*.2;
+    btn.style.transform=`translate(${x}px,${y}px) translateY(-2px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
+});
+
+/* MUSIC */
+(function(){
+  const tracks=[{name:'Draped Elegance',src:'./Draped_Elegance.mp3'}];
+  let ci=0,playing=false;
+  const audio=new Audio();
+  audio.volume=0.7;
+  const btn=document.getElementById('music-btn');
+  if(!btn)return;
+  function loadTrack(){audio.src=tracks[ci].src;audio.loop=tracks.length===1}
+  function play(){audio.play().then(()=>{playing=true;btn.classList.add('playing')}).catch(()=>{});}
+  function pause(){audio.pause();playing=false;btn.classList.remove('playing')}
+  btn.addEventListener('click',e=>{e.stopPropagation();playing?pause():play();});
+  audio.addEventListener('ended',()=>{ci=(ci+1)%tracks.length;loadTrack();play();});
+  loadTrack();
+  let started=false;
+  function kick(){
+    if(started)return;started=true;play();
+    document.removeEventListener('click',kick);
+    document.removeEventListener('touchstart',kick);
+    document.removeEventListener('keydown',kick);
+  }
+  document.addEventListener('click',kick,{passive:true});
+  document.addEventListener('touchstart',kick,{passive:true});
+  document.addEventListener('keydown',kick,{passive:true});
+})();
+
+})();
+
+</script>
+</body>
+</html>
