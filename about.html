@@ -153,11 +153,7 @@ footer{background:var(--dark);padding:5.5rem 3rem 3rem}
 .footer-bot{padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
 .f-copy{font-size:.62rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
 .f-motto{font-family:var(--serif);font-style:italic;font-size:.95rem;color:rgba(139,111,62,.4)}
-#music-btn{position:fixed;bottom:2rem;right:2rem;z-index:9000;width:52px;height:52px;border-radius:50%;background:#fff;border:none;cursor:none;box-shadow:0 4px 24px rgba(0,0,0,.13);display:flex;align-items:center;justify-content:center;transition:box-shadow .3s,transform .3s;}
-#music-btn:hover{box-shadow:0 8px 32px rgba(0,0,0,.2);transform:scale(1.08)}
-#music-btn svg{width:20px;height:20px;fill:none;stroke:var(--body);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-#music-btn.playing svg{stroke:var(--gold)}
-#music-btn.playing{box-shadow:0 0 0 3px rgba(139,111,62,.2)}
+
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
 .reveal.in{opacity:1;transform:none}
 .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
@@ -225,7 +221,7 @@ footer{background:var(--dark);padding:5.5rem 3rem 3rem}
     <li><a href="areas.html" >Areas</a></li>
     <li><a href="about.html" class="active">About</a></li>
     <li><a href="faq.html" >FAQ</a></li>
-    
+    <li><a href="atmosphere.html" style="color:#8B6F3E;font-weight:400">Atmosphere</a></li>
   </ul>
   <div class="nav-right">
     <a href="contact.html" class="nav-quote">Book a Consultation</a>
@@ -243,6 +239,7 @@ footer{background:var(--dark);padding:5.5rem 3rem 3rem}
   <a href="about.html">About</a>
   <a href="faq.html">FAQ</a>
   
+  <a href="atmosphere.html" style="color:#8B6F3E">Atmosphere</a>
   <a href="contact.html" class="drawer-cta">Book a Consultation</a>
 </div>
 
@@ -435,9 +432,6 @@ footer{background:var(--dark);padding:5.5rem 3rem 3rem}
     </div>
   </div>
 </footer>
-<button id="music-btn" aria-label="Toggle music">
-  <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-</button>
 <script>
 
 (function(){
@@ -509,26 +503,7 @@ document.querySelectorAll('.btn-solid,.btn-frame,.btn-solid-gold,.btn-frame-gold
 (function(){
   const tracks=[{name:'Draped Elegance',src:'./Draped_Elegance.mp3'}];
   let ci=0,playing=false;
-  const audio=new Audio();
-  audio.volume=0.7;
-  const btn=document.getElementById('music-btn');
-  if(!btn)return;
-  function loadTrack(){audio.src=tracks[ci].src;audio.loop=tracks.length===1}
-  function play(){audio.play().then(()=>{playing=true;btn.classList.add('playing')}).catch(()=>{});}
-  function pause(){audio.pause();playing=false;btn.classList.remove('playing')}
-  btn.addEventListener('click',e=>{e.stopPropagation();playing?pause():play();});
-  audio.addEventListener('ended',()=>{ci=(ci+1)%tracks.length;loadTrack();play();});
-  loadTrack();
-  let started=false;
-  function kick(){
-    if(started)return;started=true;play();
-    document.removeEventListener('click',kick);
-    document.removeEventListener('touchstart',kick);
-    document.removeEventListener('keydown',kick);
-  }
-  document.addEventListener('click',kick,{passive:true});
-  document.addEventListener('touchstart',kick,{passive:true});
-  document.addEventListener('keydown',kick,{passive:true});
+  
 })();
 
 })();
