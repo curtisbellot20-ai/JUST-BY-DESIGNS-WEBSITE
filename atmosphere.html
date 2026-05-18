@@ -118,31 +118,114 @@
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--ivory);font-family:var(--sans);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* ── INTRO — CINEMATIC VIDEO REVEAL ─────────── */
-#atm-intro{
-  position:fixed;inset:0;z-index:9998;background:#0a0805;cursor:pointer;
-  overflow:hidden;
-  transition:opacity 1.2s ease,visibility 1.2s;
+/* ── HERO SLIDESHOW ─────────────────────────── */
+#atm-hs{
+  position:relative;width:100%;height:100svh;min-height:500px;
+  overflow:hidden;background:#0a0805;
 }
-#atm-intro.done{opacity:0;visibility:hidden;pointer-events:none}
-#atmIntroVid{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+#atm-hs.started{cursor:default}
+.atm-hs-slide{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity 1.4s ease;pointer-events:none;
 }
-.atm-intro-tap{
-  position:absolute;bottom:2.5rem;left:0;right:0;
-  display:flex;justify-content:center;pointer-events:none;
+.atm-hs-slide.active{opacity:1;pointer-events:auto}
+.atm-hs-slide video,.atm-hs-slide img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.atm-hs-slide::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,
+    rgba(10,8,5,.1) 0%,rgba(10,8,5,.0) 30%,
+    rgba(10,8,5,.5) 80%,rgba(10,8,5,.8) 100%);
+}
+.atm-hs-cap{
+  position:absolute;bottom:4.5rem;left:0;right:0;
+  text-align:center;z-index:2;pointer-events:none;
+  opacity:0;transition:opacity .8s .4s;
+}
+.atm-hs-slide.active .atm-hs-cap{opacity:1}
+.atm-hs-cap-eye{
+  display:block;font-size:.48rem;letter-spacing:.36em;text-transform:uppercase;
+  color:rgba(232,220,200,.55);font-family:'Jost',sans-serif;font-weight:200;
+  margin-bottom:.5rem;
+}
+.atm-hs-cap-title{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,3.5vw,2.2rem);
+  font-weight:300;color:#f7f3ec;letter-spacing:.02em;
+}
+.atm-hs-cap-title em{font-style:italic;color:#A8895A}
+/* Tap-to-begin (over slide 1, fades out on start) */
+#atm-hs-tap{
+  position:absolute;inset:0;z-index:5;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.4rem;cursor:pointer;
+  transition:opacity .9s ease;
+}
+#atm-hs-tap.hidden{opacity:0;pointer-events:none}
+.atm-hs-tap-brand{
+  font-size:.52rem;letter-spacing:.4em;text-transform:uppercase;
+  color:rgba(139,111,62,.9);font-family:'Jost',sans-serif;font-weight:200;
+}
+.atm-hs-tap-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,6vw,3.8rem);
+  font-weight:300;color:#f7f3ec;text-align:center;line-height:1.15;
+}
+.atm-hs-tap-h em{font-style:italic;color:#A8895A}
+.atm-hs-tap-rule{
+  display:flex;align-items:center;gap:1rem;width:120px;
+}
+.atm-hs-tap-rule span{flex:1;height:.5px;background:#8B6F3E;opacity:.5}
+.atm-hs-tap-rule i{width:4px;height:4px;background:#8B6F3E;transform:rotate(45deg);flex-shrink:0}
+.atm-hs-tap-hint{
+  font-size:.5rem;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(247,243,236,.45);font-family:'Jost',sans-serif;font-weight:200;
   animation:atmTapPulse 2.4s ease-in-out infinite;
 }
-.atm-intro-tap-label{
-  font-size:.52rem;letter-spacing:.32em;text-transform:uppercase;
-  color:rgba(247,243,236,.55);font-family:'Jost',sans-serif;font-weight:200;
-}
 @keyframes atmTapPulse{
-  0%,100%{opacity:.55;transform:translateY(0)}
+  0%,100%{opacity:.45;transform:translateY(0)}
   50%{opacity:1;transform:translateY(-4px)}
 }
+/* Dot navigation */
+#atm-hs-dots{
+  position:absolute;bottom:1.6rem;left:0;right:0;
+  display:flex;justify-content:center;gap:.55rem;z-index:10;
+  pointer-events:none;opacity:0;transition:opacity .8s;
+}
+#atm-hs-dots.visible{opacity:1;pointer-events:auto}
+.atm-hs-dot{
+  width:6px;height:6px;border-radius:50%;padding:0;border:none;cursor:pointer;
+  background:rgba(232,220,200,.3);transition:background .35s,transform .35s;
+}
+.atm-hs-dot.active{background:#8B6F3E;transform:scale(1.4)}
+/* Scroll hint */
+#atm-hs-scroll{
+  position:absolute;bottom:1.8rem;right:2rem;z-index:10;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  pointer-events:none;opacity:0;transition:opacity 1s .8s;
+}
+#atm-hs-scroll.visible{opacity:1}
+.atm-hs-scroll-line{
+  width:1px;height:38px;
+  background:linear-gradient(to bottom,transparent,rgba(232,220,200,.4));
+  animation:atmScrollAnim 2.2s ease-in-out infinite;
+}
+@keyframes atmScrollAnim{
+  0%{transform:scaleY(0);transform-origin:top}
+  49%{transform:scaleY(1);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+.atm-hs-scroll-lbl{
+  font-size:.44rem;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(232,220,200,.38);font-family:'Jost',sans-serif;
+}
 @media(max-width:768px){
-  #atmIntroVid{width:85vw;left:50%;transform:translateX(-50%);height:100%;object-fit:cover;}
+  #atm-hs-tap{padding:2rem 1.5rem}
+  .atm-hs-tap-h{font-size:clamp(1.5rem,7vw,2.4rem)}
+  .atm-hs-cap{bottom:3.5rem}
+  #atm-hs-scroll{display:none}
+  #atm-hs-dots{bottom:1rem}
 }
 
 /* ── MUSIC BUTTON ────────────────────────────── */
@@ -163,17 +246,6 @@ body{background:var(--black);color:var(--ivory);font-family:var(--sans);font-wei
 </style>
 </head>
 <body>
-
-<!-- CINEMATIC INTRO — PURE VIDEO REVEAL -->
-<div id="atm-intro" role="button" tabindex="0" aria-label="Click to reveal the atmosphere">
-  <video id="atmIntroVid" autoplay muted playsinline preload="auto">
-    <source src="assets/video/drape-intro.mov" type="video/quicktime">
-    <source src="assets/video/drape-intro.mp4" type="video/mp4">
-  </video>
-  <div class="atm-intro-tap">
-    <span class="atm-intro-tap-label">Tap to reveal</span>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav id="atm-nav" aria-label="Atmosphere page navigation">
@@ -203,29 +275,100 @@ body{background:var(--black);color:var(--ivory);font-family:var(--sans);font-wei
   <a href="atmosphere.html" style="color:var(--gold)">Atmosphere</a>
 </div>
 
-<!-- CINEMATIC HERO -->
-<section class="atm-hero" id="atm-top">
-  <video class="atm-hero-video" id="atmHeroVid" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-    <source src="assets/video/drape-intro.mov" type="video/quicktime">
-    <source src="assets/video/drape-intro.mp4" type="video/mp4">
-  </video>
-  <div class="atm-hero-grad"></div>
-  <div class="atm-hero-glow"></div>
-  <div class="atm-hero-vig"></div>
-  <div class="atm-hero-content">
-    <div class="atm-hero-ornament"></div>
-    <p class="atm-hero-eyebrow">Just By Designs &nbsp;·&nbsp; South Florida</p>
-    <h1 class="atm-hero-h1">Every unforgettable event<br>starts with <em>atmosphere.</em></h1>
-    <div class="atm-hero-rule"><span></span><i></i><span></span></div>
-    <p class="atm-hero-sub">We don't just decorate spaces.<br>We create moments people never forget.</p>
-    <button class="atm-begin-btn" id="atmBeginBtn" aria-label="Begin the atmosphere experience">
-      <svg class="atm-begin-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-      Begin the Experience
-    </button>
+<!-- HERO SLIDESHOW -->
+<section id="atm-hs" aria-label="Atmosphere visual showcase">
+  <div class="atm-hs-slide active" data-idx="0">
+    <video id="atmHsVid" autoplay muted playsinline preload="auto">
+      <source src="assets/video/drape-intro.mov" type="video/quicktime">
+      <source src="assets/video/drape-intro.mp4" type="video/mp4">
+    </video>
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Just By Designs · South Florida</span>
+      <div class="atm-hs-cap-title">Where every event becomes <em>unforgettable</em></div>
+    </div>
   </div>
-  <div class="atm-hero-scroll" aria-hidden="true">
-    <div class="atm-scroll-line"></div>
-    <span class="atm-scroll-lbl">Scroll</span>
+  <div class="atm-hs-slide" data-idx="1">
+    <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238842190-794RUVQ3JIEM128O5CW7/Just_by_design-14.JPG" alt="Elegant wedding reception with white ceiling draping — Just By Designs" loading="eager">
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Wedding Reception</span>
+      <div class="atm-hs-cap-title">Fort Lauderdale, Florida</div>
+    </div>
+  </div>
+  <div class="atm-hs-slide" data-idx="2">
+    <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238808458-0TBWBV3J9YK33WJWUFQ2/ArabianNights_0088.jpg" alt="Arabian Nights themed luxury gala with drapery — Just By Designs" loading="eager">
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Themed Gala</span>
+      <div class="atm-hs-cap-title">Broward County, Florida</div>
+    </div>
+  </div>
+  <div class="atm-hs-slide" data-idx="3">
+    <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592241880567-9389S887D4REIU22C1MS/50bday-75.jpg" alt="Luxury milestone birthday celebration with drapery — Just By Designs" loading="eager">
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Milestone Celebration</span>
+      <div class="atm-hs-cap-title">Miami-Dade, Florida</div>
+    </div>
+  </div>
+  <div class="atm-hs-slide" data-idx="4">
+    <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238804144-2307M8ZZHGDVO03SNIFG/40+For+the+Culture-100.jpg" alt="Corporate gala with elegant drapery and lighting — Just By Designs" loading="eager">
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Corporate Gala</span>
+      <div class="atm-hs-cap-title">Fort Lauderdale, Florida</div>
+    </div>
+  </div>
+  <div class="atm-hs-slide" data-idx="5">
+    <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238805095-JIZH4C5KTLURHULBG8SX/ArabianNights_0046.jpg" alt="Private dinner event with Arabian Nights draping — Just By Designs" loading="eager">
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Private Dinner</span>
+      <div class="atm-hs-cap-title">Palm Beach, Florida</div>
+    </div>
+  </div>
+  <div class="atm-hs-slide" data-idx="6">
+    <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238893077-F40KRLAFP6YLFFYJWXYB/Jackie%27s+53rd+BDay-122.jpg" alt="Social celebration with draped fabric tent — Just By Designs" loading="eager">
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Social Celebration</span>
+      <div class="atm-hs-cap-title">South Florida</div>
+    </div>
+  </div>
+  <div class="atm-hs-slide" data-idx="7">
+    <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592644528623-EOJHJJCZE0DA1RRF441U/mothersday-1296.jpg" alt="Elegant wedding tablescape with premium drapery — Just By Designs" loading="eager">
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Wedding Tablescape</span>
+      <div class="atm-hs-cap-title">Broward County, Florida</div>
+    </div>
+  </div>
+  <div class="atm-hs-slide" data-idx="8">
+    <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592610695742-P18GSUDYP8XNHF3ETLR4/SampleImage0010.jpg" alt="Luxury event venue entry with flowing drapery — Just By Designs" loading="eager">
+    <div class="atm-hs-cap">
+      <span class="atm-hs-cap-eye">Venue Entry Design</span>
+      <div class="atm-hs-cap-title">Miami, Florida</div>
+    </div>
+  </div>
+
+  <!-- Tap to begin -->
+  <div id="atm-hs-tap" role="button" tabindex="0" aria-label="Tap to begin the atmosphere experience">
+    <p class="atm-hs-tap-brand">Just By Designs &nbsp;·&nbsp; South Florida</p>
+    <h1 class="atm-hs-tap-h">Every unforgettable event<br>starts with <em>atmosphere.</em></h1>
+    <div class="atm-hs-tap-rule"><span></span><i></i><span></span></div>
+    <p class="atm-hs-tap-hint">&#9658;&nbsp; Tap anywhere to begin</p>
+  </div>
+
+  <!-- Dot navigation -->
+  <div id="atm-hs-dots" role="tablist" aria-label="Slide navigation">
+    <button class="atm-hs-dot active" data-to="0" aria-label="Slide 1"></button>
+    <button class="atm-hs-dot" data-to="1" aria-label="Slide 2"></button>
+    <button class="atm-hs-dot" data-to="2" aria-label="Slide 3"></button>
+    <button class="atm-hs-dot" data-to="3" aria-label="Slide 4"></button>
+    <button class="atm-hs-dot" data-to="4" aria-label="Slide 5"></button>
+    <button class="atm-hs-dot" data-to="5" aria-label="Slide 6"></button>
+    <button class="atm-hs-dot" data-to="6" aria-label="Slide 7"></button>
+    <button class="atm-hs-dot" data-to="7" aria-label="Slide 8"></button>
+    <button class="atm-hs-dot" data-to="8" aria-label="Slide 9"></button>
+  </div>
+
+  <!-- Scroll hint -->
+  <div id="atm-hs-scroll" aria-hidden="true">
+    <div class="atm-hs-scroll-line"></div>
+    <span class="atm-hs-scroll-lbl">Scroll</span>
   </div>
 </section>
 
@@ -283,73 +426,6 @@ body{background:var(--black);color:var(--ivory);font-family:var(--sans);font-wei
     <span class="atm-mi">Backdrop &amp; Stage</span><span class="atm-ms">✦</span>
     <span class="atm-mi">Structural Trussing</span><span class="atm-ms">✦</span>
   </div>
-</div>
-
-<!-- GALLERY SECTION -->
-<section class="atm-gallery-section" id="atm-gallery">
-  <div class="atm-gallery-inner">
-    <div class="atm-gallery-header">
-      <p class="atm-eyebrow sr">Visual Portfolio</p>
-      <div class="atm-divider sr d1"><span></span><i></i><span></span></div>
-      <h2 class="atm-section-title sr d1">The <em>Work</em></h2>
-      <p class="atm-gallery-note sr d2">Click any image to expand</p>
-    </div>
-
-    <div class="atm-gallery-grid">
-      <div class="atm-gi tall sr" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238842190-794RUVQ3JIEM128O5CW7/Just_by_design-14.JPG" data-caption="Wedding Reception · South Florida">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238842190-794RUVQ3JIEM128O5CW7/Just_by_design-14.JPG" alt="Elegant wedding reception with white ceiling draping — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Wedding Reception</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-      <div class="atm-gi sr d1" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238808458-0TBWBV3J9YK33WJWUFQ2/ArabianNights_0088.jpg" data-caption="Arabian Nights Gala · Broward County">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238808458-0TBWBV3J9YK33WJWUFQ2/ArabianNights_0088.jpg" alt="Arabian Nights themed luxury gala — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Themed Gala</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-      <div class="atm-gi sr d2" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592241880567-9389S887D4REIU22C1MS/50bday-75.jpg" data-caption="Milestone Birthday · Miami-Dade">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592241880567-9389S887D4REIU22C1MS/50bday-75.jpg" alt="Luxury milestone birthday celebration — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Milestone Birthday</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-      <div class="atm-gi sr d1" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238804144-2307M8ZZHGDVO03SNIFG/40+For+the+Culture-100.jpg" data-caption="Corporate Gala · Fort Lauderdale">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238804144-2307M8ZZHGDVO03SNIFG/40+For+the+Culture-100.jpg" alt="Corporate gala with elegant drapery — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Corporate Gala</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-      <div class="atm-gi sr d2" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238805095-JIZH4C5KTLURHULBG8SX/ArabianNights_0046.jpg" data-caption="Private Dinner · Palm Beach">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238805095-JIZH4C5KTLURHULBG8SX/ArabianNights_0046.jpg" alt="Arabian Nights private dinner event — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Private Dinner</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-      <div class="atm-gi sr d3" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238893077-F40KRLAFP6YLFFYJWXYB/Jackie%27s+53rd+BDay-122.jpg" data-caption="Social Celebration · South Florida">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238893077-F40KRLAFP6YLFFYJWXYB/Jackie%27s+53rd+BDay-122.jpg" alt="Social celebration with draped fabric tent — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Social Celebration</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-      <div class="atm-gi tall sr d1" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592644528623-EOJHJJCZE0DA1RRF441U/mothersday-1296.jpg" data-caption="Wedding Tablescape · Broward County">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592644528623-EOJHJJCZE0DA1RRF441U/mothersday-1296.jpg" alt="Elegant wedding tablescape with drapery — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Wedding Tablescape</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-      <div class="atm-gi sr d2" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592610695742-P18GSUDYP8XNHF3ETLR4/SampleImage0010.jpg" data-caption="Venue Entry Design · Miami">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592610695742-P18GSUDYP8XNHF3ETLR4/SampleImage0010.jpg" alt="Luxury event venue entry with draping — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Venue Entry</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-      <div class="atm-gi sr d3" data-src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592610676545-UQMH797RK3WNN58TZ6YK/SampleImage0006.jpg" data-caption="Corporate Event · Fort Lauderdale">
-        <img src="https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592610676545-UQMH797RK3WNN58TZ6YK/SampleImage0006.jpg" alt="Corporate event with uplighting and drapery — Just By Designs" loading="lazy">
-        <span class="atm-gi-label">Corporate Event</span>
-        <div class="atm-gi-expand"><svg viewBox="0 0 24 24"><path d="M15 3h6m0 0v6m0-6L14 10M9 21H3m0 0v-6m0 6l7-7"/></svg></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="atm-lightbox" id="atmLightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button class="atm-lb-close" id="atmLbClose" aria-label="Close image viewer">✕</button>
-  <img class="atm-lb-img" id="atmLbImg" src="" alt="">
-  <div class="atm-lb-caption" id="atmLbCaption"></div>
 </div>
 
 <!-- REVIEWS SECTION -->
@@ -586,32 +662,6 @@ const io = new IntersectionObserver(entries=>{
 }, {threshold:0.1});
 document.querySelectorAll('.sr,.sr-l,.sr-r,.sr-s').forEach(el=>io.observe(el));
 
-/* ── LIGHTBOX ────────────────────────────────── */
-const lightbox = document.getElementById('atmLightbox');
-const lbImg = document.getElementById('atmLbImg');
-const lbCaption = document.getElementById('atmLbCaption');
-const lbClose = document.getElementById('atmLbClose');
-
-document.querySelectorAll('.atm-gi').forEach(gi=>{
-  gi.addEventListener('click', ()=>{
-    const src = gi.dataset.src;
-    const cap = gi.dataset.caption || '';
-    lbImg.src = src;
-    lbImg.alt = cap;
-    lbCaption.textContent = cap;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
-});
-function closeLightbox(){
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-  setTimeout(()=>{ lbImg.src=''; }, 350);
-}
-lbClose.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', e=>{ if(e.target===lightbox) closeLightbox(); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
-
 /* ── FAQ ACCORDION ───────────────────────────── */
 document.querySelectorAll('.atm-faq-item').forEach(item=>{
   const q = item.querySelector('.atm-faq-q');
@@ -628,68 +678,94 @@ document.querySelectorAll('.atm-faq-item').forEach(item=>{
   });
 });
 
-/* ── MUSIC (Atmosphere page only) ────────────── */
+/* ── MUSIC ───────────────────────────────────── */
+let _audioStarted = false;
+let _audioPlaying = false;
+const _audio = new Audio('assets/audio/Draped_Elegance.mp3');
+_audio.loop = true; _audio.volume = 0;
+const _musicBtn = document.getElementById('atm-mp');
+
+function _startMusic(){
+  if(_audioStarted) return;
+  _audioStarted = true;
+  _audio.play().then(()=>{
+    _audioPlaying = true;
+    _musicBtn.classList.add('visible','playing');
+    let v = 0;
+    const t = setInterval(()=>{
+      v = Math.min(v + 0.035, 0.7);
+      _audio.volume = v;
+      if(v >= 0.7) clearInterval(t);
+    }, 80);
+  }).catch(()=>{});
+}
+
+_musicBtn.addEventListener('click', e=>{
+  e.stopPropagation();
+  if(!_audioStarted){ _startMusic(); return; }
+  if(_audio.paused){
+    _audio.play().then(()=>{ _audioPlaying=true; _musicBtn.classList.add('playing'); });
+  } else {
+    _audio.pause(); _audioPlaying=false; _musicBtn.classList.remove('playing');
+  }
+});
+
+/* ── HERO SLIDESHOW ──────────────────────────── */
 (function(){
-  const tracks = [{name:'Draped Elegance', src:'assets/audio/Draped_Elegance.mp3'}];
-  let ci=0, playing=false, started=false;
-  const audio = new Audio();
-  audio.volume = 0;
+  const hs       = document.getElementById('atm-hs');
+  const tapEl    = document.getElementById('atm-hs-tap');
+  const dotsEl   = document.getElementById('atm-hs-dots');
+  const scrollEl = document.getElementById('atm-hs-scroll');
+  const vid      = document.getElementById('atmHsVid');
+  const slides   = Array.from(document.querySelectorAll('.atm-hs-slide'));
+  const dots     = Array.from(dotsEl.querySelectorAll('.atm-hs-dot'));
 
-  const musicBtn = document.getElementById('atm-mp');
-  const beginBtn = document.getElementById('atmBeginBtn');
+  const PHOTO_DUR = 6000;
+  const VIDEO_MAX = 12000;
+  let current = 0, timer = null, started = false;
 
-  function loadTrack(){ audio.src=tracks[ci].src; audio.loop=true; }
-
-  function fadeIn(){
-    audio.volume=0;
-    const t=setInterval(()=>{ audio.volume=Math.min(audio.volume+0.035,0.7); if(audio.volume>=0.7)clearInterval(t); },80);
+  function goTo(idx){
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = ((idx % slides.length) + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    scheduleNext();
   }
 
-  function play(){
-    audio.play().then(()=>{ playing=true; if(musicBtn)musicBtn.classList.add('playing'); fadeIn(); }).catch(()=>{});
+  function scheduleNext(){
+    clearTimeout(timer);
+    if(current === 0 && vid){
+      vid.currentTime = 0;
+      vid.play().catch(()=>{});
+      timer = setTimeout(()=>goTo(1), VIDEO_MAX);
+      vid.onended = ()=>{ clearTimeout(timer); goTo(1); };
+    } else {
+      timer = setTimeout(()=>goTo(current + 1), PHOTO_DUR);
+    }
   }
 
-  function pause(){
-    audio.pause(); playing=false; if(musicBtn)musicBtn.classList.remove('playing');
+  function begin(e){
+    if(started) return;
+    started = true;
+    _startMusic();
+    tapEl.classList.add('hidden');
+    hs.classList.add('started');
+    dotsEl.classList.add('visible');
+    scrollEl.classList.add('visible');
+    scheduleNext();
   }
 
-  loadTrack();
+  hs.addEventListener('click', begin);
+  tapEl.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') begin(); });
 
-  // Exposed so the intro overlay can trigger music on first click
-  window._atmStartMusic = function(){
-    if(!started){ started=true; if(musicBtn)musicBtn.classList.add('visible'); play(); }
-  };
-
-  // "Begin the Experience" button — also starts music + scrolls to story
-  if(beginBtn) beginBtn.addEventListener('click',()=>{
-    window._atmStartMusic();
-    const storyEl=document.querySelector('.atm-story');
-    if(storyEl) storyEl.scrollIntoView({behavior:'smooth',block:'start'});
+  dots.forEach(dot=>{
+    dot.addEventListener('click', e=>{
+      e.stopPropagation();
+      if(!started) begin();
+      goTo(parseInt(dot.dataset.to, 10));
+    });
   });
-
-  // Circle button toggles play/pause
-  if(musicBtn) musicBtn.addEventListener('click',e=>{ e.stopPropagation(); playing?pause():play(); });
-
-  audio.addEventListener('ended',()=>{ loadTrack(); play(); });
-  audio.addEventListener('error',()=>{ setTimeout(()=>{ loadTrack(); if(playing)play(); },500); });
-})();
-
-/* ── INTRO OVERLAY ───────────────────────────── */
-(function(){
-  const intro = document.getElementById('atm-intro');
-  let dismissed = false;
-  function dismiss(){
-    if(dismissed) return;
-    dismissed = true;
-    intro.classList.add('done');
-    setTimeout(()=>{ if(intro.parentNode) intro.parentNode.removeChild(intro); }, 1250);
-    if(window._atmStartMusic) window._atmStartMusic();
-  }
-  intro.addEventListener('click', dismiss);
-  intro.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') dismiss(); });
-  // Auto-dismiss when video ends
-  const vid = document.getElementById('atmIntroVid');
-  if(vid) vid.addEventListener('ended', dismiss);
 })();
 
 })();
