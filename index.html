@@ -1109,6 +1109,68 @@ document.querySelectorAll('a,button,.hdot,.gf').forEach(el=>{
 document.addEventListener('mousedown',()=>document.body.classList.add('cursor-click'));
 document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-click'));
 
+/* ── SMOOTH SCROLL ───────────────────────────── */
+function jbdScroll(id){
+  if(id==='top'){window.scrollTo({top:0,behavior:'smooth'});return}
+  const el=document.getElementById(id);
+  if(el){
+    const top=el.getBoundingClientRect().top+window.pageYOffset-nav.offsetHeight-8;
+    window.scrollTo({top,behavior:'smooth'});
+  }
+}
+document.querySelectorAll('[data-scroll]').forEach(el=>{
+  el.addEventListener('click',function(e){
+    e.preventDefault();e.stopPropagation();
+    closeDrawer();jbdScroll(this.dataset.scroll);
+  });
+});
+
+/* ── STAT COUNTER ────────────────────────────── */
+function countUp(el){
+  const target=+el.dataset.target;
+  const suffix=el.dataset.suffix||'';
+  const dur=1800,step=16,inc=target/(dur/step);
+  let val=0;
+  const t=setInterval(()=>{
+    val=Math.min(val+inc,target);
+    el.textContent=Math.round(val)+suffix;
+    if(val>=target)clearInterval(t);
+  },step);
+}
+
+/* ── INTERSECTION OBSERVER ───────────────────── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    if(el.classList.contains('reveal')||el.classList.contains('service-block')||el.classList.contains('rcard')||el.classList.contains('stat-item')||el.classList.contains('area-card')){el.classList.add('in');}
+    if(el.classList.contains('img-reveal')){el.classList.add('in');}
+    if(el.classList.contains('reveal-text')){el.classList.add('in');}
+    if(el.classList.contains('stat-item')){
+      const numEl=el.querySelector('.stat-num[data-target]');
+      if(numEl)setTimeout(()=>countUp(numEl),300);
+    }
+    io.unobserve(el);
+  });
+},{threshold:0.15});
+document.querySelectorAll('.reveal,.service-block,.rcard,.stat-item,.area-card,.img-reveal,.reveal-text').forEach(el=>io.observe(el));
+
+/* ── MAGNETIC BUTTONS ────────────────────────── */
+document.querySelectorAll('.btn-solid,.btn-frame,.btn-solid-gold,.btn-frame-gold,.btn-frame-dark,.nav-quote').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.25}px) translateY(-2px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
+});
+
+/* ── FORM ────────────────────────────────────── */
+document.getElementById('inquiryForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  this.style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+});
+
 })();
 </script>
 </body>
