@@ -1110,15 +1110,17 @@ document.addEventListener('mousedown',()=>document.body.classList.add('cursor-cl
 document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-click'));
 
 /* ── LOADER ──────────────────────────────────── */
-window.addEventListener('load',()=>{
+function _dismissLoader(){
+  if(_dismissLoader._done) return;
+  _dismissLoader._done = true;
+  document.getElementById('loader').classList.add('out');
   setTimeout(()=>{
-    document.getElementById('loader').classList.add('out');
-    setTimeout(()=>{
-      document.getElementById('loader').style.display='none';
-      startHeroAnim();
-    },1100);
-  },1600);
-});
+    document.getElementById('loader').style.display='none';
+    startHeroAnim();
+  },1100);
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(_dismissLoader,1600));
+setTimeout(_dismissLoader,6000);
 
 /* ── HERO WORD SPLIT ─────────────────────────── */
 function startHeroAnim(){
