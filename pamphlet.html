@@ -100,7 +100,7 @@
   .quote-bg { position:absolute; inset:0; z-index:0; background-image:url('https://images.squarespace-cdn.com/content/v1/5edb18cc2dbee2768452fb16/1592238804144-2307M8ZZHGDVO03SNIFG/40+For+the+Culture-100.jpg'); background-size:cover; background-position:center; filter:brightness(.22) saturate(.5); transform:scale(1.04); transition:transform 9s ease; }
   .quote-section:hover .quote-bg { transform:scale(1); }
   .quote-scrim { position:absolute; inset:0; z-index:1; background:rgba(13,11,8,.6); }
-  .quote-section::before { content:'\"'; position:absolute; top:-20px; left:50%; transform:translateX(-50%); font-family:'Cormorant Garamond',serif; font-size:200px; color:rgba(201,169,110,.06); pointer-events:none; line-height:1; z-index:2; }
+  .quote-section::before { content:'"'; position:absolute; top:-20px; left:50%; transform:translateX(-50%); font-family:'Cormorant Garamond',serif; font-size:200px; color:rgba(201,169,110,.06); pointer-events:none; line-height:1; z-index:2; }
   .quote-content { position:relative; z-index:3; }
   .big-quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(26px,5vw,48px); line-height:1.5; color:var(--ivory); max-width:700px; margin:0 auto 32px; }
   .big-quote strong { color:var(--gold-light); font-weight:400; }
@@ -188,21 +188,6 @@
   .contact-links a { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--taupe); text-decoration:none; font-weight:200; transition:color .3s; }
   .contact-links a:hover { color:var(--gold-light); }
 
-  /* MUSIC */
-  #mp { position:fixed; bottom:2rem; right:2rem; z-index:9000; display:flex; align-items:center; gap:.65rem; background:rgba(13,11,8,.93); border:.5px solid rgba(201,169,110,.25); backdrop-filter:blur(12px); padding:.65rem 1.1rem; box-shadow:0 8px 32px rgba(0,0,0,.45); opacity:0; transform:translateY(8px); transition:opacity .6s,transform .6s; }
-  #mp.v { opacity:1; transform:none; }
-  .mpeq { display:flex; align-items:flex-end; gap:2.5px; height:16px; flex-shrink:0; }
-  .mpeq span { display:block; width:3px; background:var(--gold); border-radius:2px; transform-origin:bottom; animation:mpEq .9s ease-in-out infinite alternate; }
-  .mpeq span:nth-child(1){height:5px;animation-duration:.8s} .mpeq span:nth-child(2){height:14px;animation-delay:.15s;animation-duration:1.1s} .mpeq span:nth-child(3){height:8px;animation-delay:.05s;animation-duration:.7s} .mpeq span:nth-child(4){height:11px;animation-delay:.25s;animation-duration:.95s} .mpeq span:nth-child(5){height:5px;animation-delay:.1s;animation-duration:.85s}
-  .mpeq.p span { animation-play-state:paused; }
-  @keyframes mpEq { from{transform:scaleY(.25)} to{transform:scaleY(1)} }
-  .mpd { width:1px; height:18px; background:rgba(201,169,110,.2); flex-shrink:0; }
-  .mpnm { font-family:'Cormorant Garamond',serif; font-size:.82rem; color:var(--ivory-soft); white-space:nowrap; max-width:140px; overflow:hidden; text-overflow:ellipsis; }
-  .mpsub { font-size:.48rem; letter-spacing:.16em; text-transform:uppercase; color:var(--taupe); }
-  .mpbtn { background:none; border:none; cursor:pointer; color:var(--taupe); padding:0; display:flex; align-items:center; justify-content:center; transition:color .2s; }
-  .mpbtn:hover { color:var(--gold); }
-  .mpbtn svg { width:14px; height:14px; fill:currentColor; }
-
   /* CANVAS */
   #dc { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.55; }
 
@@ -213,7 +198,6 @@
     .stats-row { grid-template-columns:1fr 1fr; gap:2.5rem; }
     section { padding:80px 28px; }
     .cta-section,.spread,.closing,.contact-footer,.stats-strip { padding:70px 28px; }
-    #mp { bottom:1rem; right:1rem; }
   }
 </style>
 </head>
@@ -391,7 +375,7 @@
   <div class="closing-bg"></div>
   <div class="closing-scrim"></div>
   <div class="closing-content">
-    <p class="closing-headline sr">"Some moments only last a day."</p>
+    <p class="closing-headline sr">“Some moments only last a day.”</p>
     <p class="closing-line sr d1">The feeling lasts forever.</p>
     <div class="divider sr d2"><span></span><i></i><span></span></div>
     <p class="prose sr d3" style="max-width:420px">At Just By Designs, we believe every space has the potential to become extraordinary.</p>
@@ -409,16 +393,8 @@
     <a href="tel:+19548397173">(954) 839-7173</a>
     <a href="https://www.instagram.com/justbydesigns" target="_blank">@justbydesigns</a>
     <a href="#">South Florida</a>
+    <a href="atmosphere.html" style="color:#c9a96e">Atmosphere ✦</a>
   </div>
-</div>
-
-<!-- MUSIC PLAYER -->
-<div id="mp">
-  <div class="mpeq p" id="mpeq"><span></span><span></span><span></span><span></span><span></span></div>
-  <div class="mpd"></div>
-  <div><div class="mpnm" id="mpnm">Draped Elegance</div><div class="mpsub">Just By Designs</div></div>
-  <div class="mpd"></div>
-  <button class="mpbtn" id="mpbtn" aria-label="Play / Pause"><svg id="mpicon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
 </div>
 
 <script>
@@ -458,26 +434,6 @@
   function tick(){ctx.clearRect(0,0,W,H);sv+=(sy-lsy-sv)*.15;lsy=sy;ctx.globalAlpha=Math.min(1,.25+Math.abs(sv)*.05);ds.forEach(d=>{d.u(sv);d.d();});ctx.globalAlpha=1;rf=requestAnimationFrame(tick);}
   tick();
   document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(rf);else tick();});
-
-  /* MUSIC */
-  const tracks=[{name:'Draped Elegance',src:'assets/audio/Draped_Elegance.mp3'},{name:'Elegancia Envolvida',src:'assets/audio/ELEGANCIA_ENVOLVIDA.mp3'}];
-  let ci=0,playing=false;
-  const audio=new Audio(); audio.volume=0.7;
-  const player=document.getElementById('mp'),eq=document.getElementById('mpeq'),btn=document.getElementById('mpbtn'),icon=document.getElementById('mpicon'),nm=document.getElementById('mpnm');
-  function lt(){audio.src=tracks[ci].src;audio.loop=tracks.length===1;if(nm)nm.textContent=tracks[ci].name;}
-  function si(p){icon.innerHTML=p?'<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>':'<polygon points="5,3 19,12 5,21"/>';}
-  function pl(){audio.play().then(()=>{playing=true;si(true);eq.classList.remove('p');}).catch(()=>{});}
-  function pa(){audio.pause();playing=false;si(false);eq.classList.add('p');}
-  btn.addEventListener('click',e=>{e.stopPropagation();playing?pa():pl();});
-  audio.addEventListener('ended',()=>{ci=(ci+1)%tracks.length;lt();pl();});
-  audio.addEventListener('error',()=>{setTimeout(()=>{ci=(ci+1)%tracks.length;lt();if(playing)pl();},500);});
-  lt();
-  setTimeout(()=>player.classList.add('v'),1000);
-  let started=false;
-  function kick(){if(started)return;started=true;pl();document.removeEventListener('click',kick);document.removeEventListener('touchstart',kick);document.removeEventListener('keydown',kick);}
-  document.addEventListener('click',kick,{passive:true});
-  document.addEventListener('touchstart',kick,{passive:true});
-  document.addEventListener('keydown',kick,{passive:true});
 })();
 </script>
 </body>
