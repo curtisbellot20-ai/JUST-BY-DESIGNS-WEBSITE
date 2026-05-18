@@ -1,0 +1,24 @@
+{
+  "name": "just-by-design-website",
+  "version": "1.0.0",
+  "description": "Just By Design LLC — Luxury Event Draping Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 3000",
+    "serve": "npx serve . --listen 3000",
+    "dev": "npx live-server --port=3000 --open=index.html"
+  },
+  "keywords": [
+    "event-draping",
+    "south-florida",
+    "luxury-events",
+    "wedding-draping",
+    "just-by-design"
+  ],
+  "author": "Just By Design LLC",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.0.0"
+  }
+}
