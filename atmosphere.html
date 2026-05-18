@@ -118,62 +118,60 @@
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--ivory);font-family:var(--sans);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* ── INTRO — ENGAGE ATMOSPHERE ──────────────── */
+/* ── INTRO — CINEMATIC VIDEO REVEAL ─────────── */
 #atm-intro{
-  position:fixed;inset:0;z-index:9998;background:#1a1208;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-  transition:opacity .9s ease,visibility .9s;
+  position:fixed;inset:0;z-index:9998;background:#0a0805;cursor:pointer;
+  overflow:hidden;
+  transition:opacity 1.2s ease,visibility 1.2s;
 }
 #atm-intro.done{opacity:0;visibility:hidden;pointer-events:none}
 #atmIntroVid{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
 }
-.atm-intro-content{
-  position:relative;z-index:2;text-align:center;padding:2rem;pointer-events:none;
+.atm-intro-tap{
+  position:absolute;bottom:2.5rem;left:0;right:0;
+  display:flex;justify-content:center;pointer-events:none;
+  animation:atmTapPulse 2.4s ease-in-out infinite;
 }
-.atm-intro-ornament{
-  width:1px;height:52px;background:linear-gradient(to bottom,transparent,#8B6F3E,transparent);
-  margin:0 auto 2rem;animation:fadeUp .8s both .4s;
+.atm-intro-tap-label{
+  font-size:.52rem;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(247,243,236,.55);font-family:'Jost',sans-serif;font-weight:200;
 }
-.atm-intro-eyebrow{
-  font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;
-  color:#8B6F3E;font-weight:200;margin-bottom:1.8rem;animation:fadeUp .8s both .6s;
-}
-.atm-intro-headline{
-  font-family:'Cormorant Garamond',serif;font-weight:300;
-  font-size:clamp(1.8rem,7vw,4rem);line-height:1.15;color:#f7f3ec;
-  animation:fadeUp 1s both .8s;
-}
-.atm-intro-headline em{font-style:italic;color:#A8895A}
-.atm-intro-rule{
-  display:flex;align-items:center;gap:1rem;margin:2rem auto;width:160px;
-  animation:fadeUp .8s both 1.1s;
-}
-.atm-intro-rule span{flex:1;height:.5px;background:#8B6F3E;opacity:.5}
-.atm-intro-rule i{width:4px;height:4px;background:#8B6F3E;transform:rotate(45deg);flex-shrink:0}
-.atm-intro-hint{
-  font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(247,240,228,.4);animation:fadeUp .8s both 1.3s;
+@keyframes atmTapPulse{
+  0%,100%{opacity:.55;transform:translateY(0)}
+  50%{opacity:1;transform:translateY(-4px)}
 }
 @media(max-width:768px){
-  #atmIntroVid{width:85vw;height:auto;position:relative;inset:auto;border-radius:2px}
+  #atmIntroVid{width:85vw;left:50%;transform:translateX(-50%);height:100%;object-fit:cover;}
 }
+
+/* ── MUSIC BUTTON ────────────────────────────── */
+#atm-mp{
+  position:fixed;bottom:2rem;right:2rem;z-index:9000;
+  width:52px;height:52px;border-radius:50%;
+  background:#fff;border:none;cursor:pointer;
+  box-shadow:0 4px 24px rgba(0,0,0,.18);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.8);pointer-events:none;
+  transition:opacity .5s,transform .5s,box-shadow .3s;
+}
+#atm-mp.visible{opacity:1;transform:scale(1);pointer-events:all}
+#atm-mp:hover{box-shadow:0 8px 32px rgba(0,0,0,.22);transform:scale(1.08)}
+#atm-mp.playing{box-shadow:0 0 0 3px rgba(139,111,62,.25)}
+#atm-mp svg{width:20px;height:20px;fill:none;stroke:#1a1208;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#atm-mp.playing svg{stroke:#8B6F3E}
 </style>
 </head>
 <body>
 
-<!-- CINEMATIC INTRO — ENGAGE ATMOSPHERE -->
-<div id="atm-intro" role="button" tabindex="0" aria-label="Click to begin the atmosphere experience">
+<!-- CINEMATIC INTRO — PURE VIDEO REVEAL -->
+<div id="atm-intro" role="button" tabindex="0" aria-label="Click to reveal the atmosphere">
   <video id="atmIntroVid" autoplay muted playsinline preload="auto">
     <source src="assets/video/drape-intro.mov" type="video/quicktime">
     <source src="assets/video/drape-intro.mp4" type="video/mp4">
   </video>
-  <div class="atm-intro-content">
-    <div class="atm-intro-ornament"></div>
-    <p class="atm-intro-eyebrow">Just By Designs &nbsp;·&nbsp; South Florida</p>
-    <h2 class="atm-intro-headline">Click anywhere to<br><em>engage the Atmosphere</em></h2>
-    <div class="atm-intro-rule"><span></span><i></i><span></span></div>
-    <p class="atm-intro-hint">&#9658;&nbsp; Music will begin</p>
+  <div class="atm-intro-tap">
+    <span class="atm-intro-tap-label">Tap to reveal</span>
   </div>
 </div>
 
@@ -674,6 +672,24 @@ document.querySelectorAll('.atm-faq-item').forEach(item=>{
 
   audio.addEventListener('ended',()=>{ loadTrack(); play(); });
   audio.addEventListener('error',()=>{ setTimeout(()=>{ loadTrack(); if(playing)play(); },500); });
+})();
+
+/* ── INTRO OVERLAY ───────────────────────────── */
+(function(){
+  const intro = document.getElementById('atm-intro');
+  let dismissed = false;
+  function dismiss(){
+    if(dismissed) return;
+    dismissed = true;
+    intro.classList.add('done');
+    setTimeout(()=>{ if(intro.parentNode) intro.parentNode.removeChild(intro); }, 1250);
+    if(window._atmStartMusic) window._atmStartMusic();
+  }
+  intro.addEventListener('click', dismiss);
+  intro.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') dismiss(); });
+  // Auto-dismiss when video ends
+  const vid = document.getElementById('atmIntroVid');
+  if(vid) vid.addEventListener('ended', dismiss);
 })();
 
 })();
