@@ -1109,6 +1109,61 @@ document.querySelectorAll('a,button,.hdot,.gf').forEach(el=>{
 document.addEventListener('mousedown',()=>document.body.classList.add('cursor-click'));
 document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-click'));
 
+/* ── LOADER ──────────────────────────────────── */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('out');
+    setTimeout(()=>{
+      document.getElementById('loader').style.display='none';
+      startHeroAnim();
+    },1100);
+  },1600);
+});
+
+/* ── HERO WORD SPLIT ─────────────────────────── */
+function startHeroAnim(){
+  const h1=document.getElementById('heroTitle');
+  if(!h1) return;
+  const parts=h1.innerHTML.split(/(<em>.*?<\/em>|\s+)/);
+  let out='';
+  parts.forEach(p=>{
+    if(!p||/^\s+$/.test(p)){out+=' ';return}
+    out+=`<span class="word"><span class="word-inner">${p}</span></span>`;
+  });
+  h1.innerHTML=out;
+  h1.querySelectorAll('.word-inner').forEach((w,i)=>{w.style.transitionDelay=(i*0.07)+'s'});
+  requestAnimationFrame(()=>{
+    h1.classList.add('animate');
+    const sub=document.querySelector('.hero-sub');
+    const btns=document.querySelector('.hero-btns');
+    if(sub) setTimeout(()=>sub.classList.add('animate'),400);
+    if(btns) setTimeout(()=>btns.classList.add('animate'),600);
+  });
+}
+
+/* ── NAV ─────────────────────────────────────── */
+const nav=document.getElementById('nav');
+const sectionIds=['top','what','stats','gallery','areas','about','reviews','cta','contact'];
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>60);
+  let current='top';
+  sectionIds.forEach(id=>{
+    const el=id==='top'?document.body:document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<=120) current=id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.dataset.scroll===current);
+  });
+},{passive:true});
+
+/* ── HAMBURGER ───────────────────────────────── */
+const hamburger=document.getElementById('hamburger');
+const drawer=document.getElementById('navDrawer');
+function openDrawer(){hamburger.classList.add('open');drawer.classList.add('open');document.body.style.overflow='hidden'}
+function closeDrawer(){hamburger.classList.remove('open');drawer.classList.remove('open');document.body.style.overflow=''}
+if(hamburger) hamburger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
 /* ── SMOOTH SCROLL ───────────────────────────── */
 function jbdScroll(id){
   if(id==='top'){window.scrollTo({top:0,behavior:'smooth'});return}
