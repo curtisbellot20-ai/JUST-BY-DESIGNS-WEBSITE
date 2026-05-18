@@ -452,12 +452,9 @@ document.addEventListener('mousedown',()=>document.body.classList.add('cursor-cl
 document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-click'));
 
 /* LOADER */
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    const loader=document.getElementById('loader');
-    if(loader){loader.classList.add('out');setTimeout(()=>{loader.style.display='none';},1100);}
-  },900);
-});
+function _dL(){if(_dL._d)return;_dL._d=true;const l=document.getElementById('loader');if(l){l.classList.add('out');setTimeout(()=>l.style.display='none',1100);}}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(_dL,900));
+setTimeout(_dL,6000);
 
 /* NAV SCROLL */
 const nav=document.getElementById('nav');
